@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Toggle Wispr Flow hands-free mode.
+# Reads the most recent dictation status from the app log, then fires the
+# appropriate wispr-flow:// deeplink.
+
+LOG="$HOME/Library/Logs/Wispr Flow/main.log"
+
+status=""
+if [[ -r "$LOG" ]]; then
+  status=$(grep -E "updateDictationStatus: [a-z]+" "$LOG" \
+    | tail -1 \
+    | sed -E 's/.*updateDictationStatus: ([a-z]+).*/\1/')
+fi
+
+case "$status" in
+  idle|dismissed|"")
+    open "wispr-flow://start-hands-free"
+    ;;
+  *)
+    open "wispr-flow://stop-hands-free"
+    ;;
+esac
