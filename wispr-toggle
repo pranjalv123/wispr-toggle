@@ -14,9 +14,10 @@ fi
 
 case "$status" in
   idle|dismissed|"")
-    open "wispr-flow://start-hands-free"
+    # -g: open in background so Wispr Flow doesn't steal focus / unminimize its hub window.
+    open -g "wispr-flow://start-hands-free"
     ;;
   *)
-    open "wispr-flow://stop-hands-free"
+    open -g "wispr-flow://stop-hands-free"
     ;;
 esac
