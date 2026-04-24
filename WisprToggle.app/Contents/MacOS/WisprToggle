@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Thin launcher that execs the sibling wispr-toggle script.
+# Lives at .../WisprToggle.app/Contents/MacOS/WisprToggle; the script
+# lives at .../wispr-toggle (three levels up from this file).
+exec "$(cd "$(dirname "$0")/../../.." && pwd)/wispr-toggle"
